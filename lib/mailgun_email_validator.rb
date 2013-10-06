@@ -1,0 +1,1 @@
+require 'mailgun_email_validator/railtie' if defined?(Rails)
