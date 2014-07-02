@@ -12,6 +12,12 @@ You'll need to add a ``MAILGUN_PUBLIC_KEY`` environmental variable to your syste
 
 ``export MAILGUN_PUBLIC_KEY='f23oifj3ojo2j3ofj32ijoj2iojf3iojoi2f32'``
 
+Alternatively, you can configure mailgun with an initializer:
+
+In ``config/initializers/mailgun_email_validator.rb``:
+
+``MailgunEmailValidator::MAILGUN_PUBLIC_KEY = 'f23oifj3ojo2j3ofj32ijoj2iojf3iojoi2f32'``
+
 *Note: This is not a real Mailgun public key*
 
 
@@ -21,6 +27,10 @@ To use mailgun_email_validator inside your models:
 
 You can also specify many of the usual ActiveRecord validation options including ``:on``, ``:allow_nil``, ``:allow_blank``, and ``:message``.
 
+
+There is also a helper method available on all models:
+
+``MyModel#valid_email_with_mailgun?(email) => true/false``
 ## Contributing to mailgun_email_validator
 
 Pull requests welcome.
