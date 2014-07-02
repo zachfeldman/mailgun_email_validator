@@ -47,3 +47,4 @@ Pull requests welcome.
 ## Credits
 
 * Zach Feldman [@zachfeldman](http://zfeldman.com)
+* Matt Walters [@mattwalters](https://github.com/mattwalters) (Added helper method, ability to config with an initializer.)
