@@ -1,9 +1,10 @@
+require 'active_support/core_ext/module/attribute_accessors'
 require 'rest_client'
 
 module MailgunEmailValidator
-  DEFAULT_VALIDATION_OPTIONS = {:on => :save, :allow_nil => false, :allow_blank => false, :message => nil}
+  mattr_writer :mailgun_public_key, instance_writer: false
 
-  MAILGUN_PUBLIC_KEY = nil
+  DEFAULT_VALIDATION_OPTIONS = {:on => :save, :allow_nil => false, :allow_blank => false, :message => nil}
 
   def valid_email_with_mailgun?(email)
     !! parsed_validation_response!(email)["is_valid"]
@@ -45,7 +46,8 @@ module MailgunEmailValidator
     res = RestClient.get "https://api:#{mailgun_public_key}@api.mailgun.net/v2/address/validate", {params: {address: email}}
     JSON.parse(res)
   end
+
   def mailgun_public_key
-    MAILGUN_PUBLIC_KEY || ENV['MAILGUN_PUBLIC_KEY'] || raise("You need to supply your mailgun public api key")
+    @@mailgun_public_key || ENV['MAILGUN_PUBLIC_KEY'] || raise("You need to supply your mailgun public api key")
   end
 end
